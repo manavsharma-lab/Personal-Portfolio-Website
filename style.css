@@ -1,0 +1,284 @@
+
+/* General Settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #f8fafc;
+    line-height: 1.6;
+}
+
+/* Navigation */
+header {
+    background: #111c33;
+    padding: 20px 8%;
+    border-bottom: 1px solid #334155;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    color: #38bdf8;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+nav ul a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav ul a:hover,
+nav ul a:focus {
+    color: #38bdf8;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 480px;
+    padding: 100px 10%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro {
+    color: #38bdf8;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero h1 span {
+    color: #38bdf8;
+}
+
+.hero h2 {
+    font-size: 23px;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 650px;
+    color: #cbd5e1;
+    margin-bottom: 25px;
+}
+
+/* Buttons - Improved Contrast */
+.btn {
+    display: inline-block;
+    background: #0369a1;
+    color: #ffffff;
+    padding: 12px 25px;
+    margin: 5px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #075985;
+    transform: translateY(-3px);
+}
+
+.btn.secondary {
+    background: transparent;
+    border: 1px solid #38bdf8;
+    color: #38bdf8;
+}
+
+/* Highlights */
+.highlights {
+    padding: 65px 8%;
+    text-align: center;
+    background: #17243b;
+}
+
+.highlights h2 {
+    font-size: 32px;
+    margin-bottom: 35px;
+    color: #38bdf8;
+}
+
+.highlights article {
+    display: inline-block;
+    vertical-align: top;
+    width: 28%;
+    min-width: 220px;
+    padding: 25px;
+    margin: 10px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+}
+
+.highlights article h3 {
+    color: #38bdf8;
+    margin-bottom: 12px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 22px;
+    background: #111c33;
+    color: #cbd5e1;
+}
+
+/* Keyboard Accessibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #facc15;
+    outline-offset: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 65px 5%;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero h2 {
+        font-size: 19px;
+    }
+
+    .highlights article {
+        width: 90%;
+    }
+}
+
+/* Inner Pages */
+.page-content {
+    max-width: 1100px;
+    min-height: 65vh;
+    margin: auto;
+    padding: 65px 8%;
+}
+
+.page-content h1 {
+    font-size: 40px;
+    color: #38bdf8;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.page-content .intro {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.content-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 20px 0;
+}
+
+.content-card h2 {
+    color: #38bdf8;
+    margin-bottom: 12px;
+}
+
+.content-card p,
+.content-card li {
+    color: #cbd5e1;
+}
+
+.content-card ul {
+    padding-left: 25px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.project-grid .content-card {
+    margin: 0;
+}
+
+/* Contact Form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: #0f172a;
+    color: #ffffff;
+    border: 1px solid #64748b;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: 2px solid #38bdf8;
+    border-color: #38bdf8;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font: inherit;
+}
+
+#form-status {
+    margin-top: 15px;
+    color: #38bdf8;
+}
