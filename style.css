@@ -1,5 +1,51 @@
 
-/* General Settings */
+/* =====================================
+   1. CSS VARIABLES & THEME SETTINGS
+===================================== */
+
+:root {
+    color-scheme: dark;
+
+    --bg-color: #0f172a;
+    --header-bg: #111c33;
+    --section-bg: #17243b;
+    --card-bg: #1e293b;
+
+    --text-color: #f8fafc;
+    --muted-color: #cbd5e1;
+    --primary-color: #38bdf8;
+    --button-bg: #0369a1;
+    --border-color: #334155;
+
+    --shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    --transition: 0.3s ease;
+
+    --container-width: 1100px;
+}
+
+/* Light Theme Support */
+
+html[data-theme="light"] {
+    color-scheme: light;
+
+    --bg-color: #f8fafc;
+    --header-bg: #ffffff;
+    --section-bg: #eaf2f8;
+    --card-bg: #ffffff;
+
+    --text-color: #0f172a;
+    --muted-color: #334155;
+    --primary-color: #0369a1;
+    --button-bg: #0369a1;
+    --border-color: #cbd5e1;
+
+    --shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+}
+
+/* =====================================
+   2. GENERAL SETTINGS
+===================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,20 +54,51 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #f8fafc;
-    line-height: 1.6;
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    transition: background var(--transition),
+                color var(--transition);
 }
 
-/* Navigation */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    transition: color var(--transition);
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+/* Reusable Container */
+
+.container {
+    width: min(90%, var(--container-width));
+    margin-inline: auto;
+}
+
+/* =====================================
+   3. HEADER & NAVIGATION - FLEXBOX
+===================================== */
+
 header {
-    background: #111c33;
-    padding: 20px 8%;
-    border-bottom: 1px solid #334155;
+    background: var(--header-bg);
+    padding: 18px 8%;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav {
@@ -29,11 +106,11 @@ nav {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
 }
 
 .logo {
-    color: #38bdf8;
+    color: var(--primary-color);
     font-size: 25px;
     font-weight: bold;
     text-decoration: none;
@@ -41,168 +118,156 @@ nav {
 
 nav ul {
     display: flex;
-    list-style: none;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 25px;
+    list-style: none;
 }
 
 nav ul a {
-    color: #ffffff;
+    color: var(--text-color);
     text-decoration: none;
-    transition: 0.3s;
+    font-weight: 500;
 }
 
 nav ul a:hover,
 nav ul a:focus {
-    color: #38bdf8;
+    color: var(--primary-color);
 }
 
-/* Hero Section */
+/* =====================================
+   4. HERO SECTION - FLEXBOX
+===================================== */
+
 .hero {
     min-height: 480px;
-    padding: 100px 10%;
-    text-align: center;
+    padding: clamp(60px, 10vw, 100px) 8%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .intro {
-    color: #38bdf8;
+    color: var(--primary-color);
     letter-spacing: 3px;
     margin-bottom: 15px;
 }
 
 .hero h1 {
-    font-size: 48px;
+    font-size: clamp(32px, 5vw, 48px);
     margin-bottom: 10px;
 }
 
 .hero h1 span {
-    color: #38bdf8;
+    color: var(--primary-color);
 }
 
 .hero h2 {
-    font-size: 23px;
-    color: #cbd5e1;
+    font-size: clamp(18px, 3vw, 23px);
+    color: var(--muted-color);
     margin-bottom: 20px;
 }
 
 .hero p {
     max-width: 650px;
-    color: #cbd5e1;
+    color: var(--muted-color);
     margin-bottom: 25px;
 }
 
-/* Buttons - Improved Contrast */
+/* =====================================
+   5. BUTTONS & ANIMATIONS
+===================================== */
+
 .btn {
     display: inline-block;
-    background: #0369a1;
+    background: var(--button-bg);
     color: #ffffff;
     padding: 12px 25px;
     margin: 5px;
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
+    transition: transform var(--transition),
+                background var(--transition),
+                box-shadow var(--transition);
 }
 
 .btn:hover {
     background: #075985;
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
 }
 
 .btn.secondary {
     background: transparent;
-    border: 1px solid #38bdf8;
-    color: #38bdf8;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
 }
 
-/* Highlights */
+.btn.secondary:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+/* =====================================
+   6. HIGHLIGHTS - CSS GRID
+===================================== */
+
 .highlights {
     padding: 65px 8%;
-    text-align: center;
-    background: #17243b;
+    background: var(--section-bg);
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 25px;
+    align-items: stretch;
 }
 
 .highlights h2 {
-    font-size: 32px;
-    margin-bottom: 35px;
-    color: #38bdf8;
+    grid-column: 1 / -1;
+    font-size: clamp(26px, 4vw, 32px);
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 15px;
 }
 
 .highlights article {
-    display: inline-block;
-    vertical-align: top;
-    width: 28%;
-    min-width: 220px;
+    width: 100%;
     padding: 25px;
-    margin: 10px;
-    background: #1e293b;
-    border: 1px solid #334155;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition),
+                border-color var(--transition);
+}
+
+.highlights article:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary-color);
 }
 
 .highlights article h3 {
-    color: #38bdf8;
+    color: var(--primary-color);
     margin-bottom: 12px;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 22px;
-    background: #111c33;
-    color: #cbd5e1;
-}
+/* =====================================
+   7. INNER PAGES
+===================================== */
 
-/* Keyboard Accessibility */
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid #facc15;
-    outline-offset: 4px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-    }
-
-    .hero {
-        padding: 65px 5%;
-    }
-
-    .hero h1 {
-        font-size: 34px;
-    }
-
-    .hero h2 {
-        font-size: 19px;
-    }
-
-    .highlights article {
-        width: 90%;
-    }
-}
-
-/* Inner Pages */
 .page-content {
-    max-width: 1100px;
+    width: min(90%, var(--container-width));
     min-height: 65vh;
-    margin: auto;
-    padding: 65px 8%;
+    margin-inline: auto;
+    padding: 65px 0;
 }
 
 .page-content h1 {
-    font-size: 40px;
-    color: #38bdf8;
+    font-size: clamp(28px, 4vw, 40px);
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 10px;
 }
@@ -213,38 +278,54 @@ button:focus-visible {
 }
 
 .content-card {
-    background: #1e293b;
-    border: 1px solid #334155;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 28px;
+    padding: clamp(20px, 4vw, 28px);
     margin: 20px 0;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition),
+                border-color var(--transition);
+}
+
+.content-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
 }
 
 .content-card h2 {
-    color: #38bdf8;
+    color: var(--primary-color);
     margin-bottom: 12px;
 }
 
 .content-card p,
 .content-card li {
-    color: #cbd5e1;
+    color: var(--muted-color);
 }
 
 .content-card ul {
     padding-left: 25px;
 }
 
+/* =====================================
+   8. PROJECT SECTION - ADVANCED GRID
+===================================== */
+
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 25px;
+    align-items: stretch;
 }
 
 .project-grid .content-card {
     margin: 0;
 }
 
-/* Contact Form */
+/* =====================================
+   9. CONTACT FORM
+===================================== */
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -259,26 +340,168 @@ button:focus-visible {
 .form-group textarea {
     width: 100%;
     padding: 12px;
-    background: #0f172a;
-    color: #ffffff;
-    border: 1px solid #64748b;
-    border-radius: 6px;
-    font: inherit;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: border-color var(--transition);
+}
+
+.form-group textarea {
+    min-height: 130px;
+    resize: vertical;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: 2px solid #38bdf8;
-    border-color: #38bdf8;
+    outline: 2px solid var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 button {
     cursor: pointer;
     border: none;
-    font: inherit;
 }
 
 #form-status {
     margin-top: 15px;
-    color: #38bdf8;
+    color: var(--primary-color);
+}
+
+/* =====================================
+   10. FOOTER
+===================================== */
+
+footer {
+    text-align: center;
+    padding: 22px;
+    background: var(--header-bg);
+    color: var(--muted-color);
+    border-top: 1px solid var(--border-color);
+}
+
+/* =====================================
+   11. ACCESSIBILITY
+===================================== */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #facc15;
+    outline-offset: 4px;
+}
+
+::selection {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+/* =====================================
+   12. TABLET RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 15px 5%;
+    }
+
+    nav {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    nav ul {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 65px 5%;
+    }
+
+    .highlights {
+        padding: 45px 5%;
+    }
+
+    .page-content {
+        padding: 45px 0;
+    }
+}
+
+/* =====================================
+   13. MOBILE RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 480px) {
+
+    .logo {
+        font-size: 22px;
+    }
+
+    nav ul {
+        gap: 12px;
+    }
+
+    nav ul a {
+        font-size: 14px;
+    }
+
+    .hero {
+        min-height: 400px;
+        padding: 50px 5%;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero h2 {
+        font-size: 18px;
+    }
+
+    .btn {
+        padding: 11px 18px;
+    }
+
+    .highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .content-card {
+        padding: 20px;
+    }
+}
+
+/* =====================================
+   14. REDUCED MOTION ACCESSIBILITY
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Light/Dark Theme Toggle Button */
+
+.theme-toggle {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
 }

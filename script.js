@@ -2,24 +2,68 @@
 // Wait until the HTML document is loaded
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Get the contact form
+    /* =================================
+       1. LIGHT / DARK MODE
+    ================================= */
+
+    const themeToggle = document.getElementById("theme-toggle");
+
+    // Get saved theme or use dark theme by default
+    let currentTheme = localStorage.getItem("portfolio-theme");
+
+    if (currentTheme !== "light" && currentTheme !== "dark") {
+        currentTheme = "dark";
+    }
+
+    // Apply selected theme
+    function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+
+        if (themeToggle) {
+            if (theme === "dark") {
+                themeToggle.textContent = "☀️ Light Mode";
+                themeToggle.setAttribute("aria-label", "Switch to light theme");
+            } else {
+                themeToggle.textContent = "🌙 Dark Mode";
+                themeToggle.setAttribute("aria-label", "Switch to dark theme");
+            }
+        }
+    }
+
+    // Apply theme when page loads
+    applyTheme(currentTheme);
+
+    // Switch theme on button click
+    if (themeToggle) {
+        themeToggle.addEventListener("click", function () {
+
+            currentTheme = currentTheme === "dark" ? "light" : "dark";
+
+            // Save theme preference
+            localStorage.setItem("portfolio-theme", currentTheme);
+
+            // Update website theme
+            applyTheme(currentTheme);
+        });
+    }
+
+    /* =================================
+       2. CONTACT FORM VALIDATION
+    ================================= */
+
     const contactForm = document.getElementById("contact-form");
 
-    // Run only if contact form exists on the current page
     if (contactForm) {
 
         contactForm.addEventListener("submit", function (event) {
 
-            // Prevent page refresh
             event.preventDefault();
 
-            // Get form values
             const name = document.getElementById("name").value.trim();
             const email = document.getElementById("email").value.trim();
             const subject = document.getElementById("subject").value.trim();
             const message = document.getElementById("message").value.trim();
 
-            // Get status message element
             const status = document.getElementById("form-status");
 
             // Check empty fields
